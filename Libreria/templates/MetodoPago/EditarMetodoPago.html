@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %} Editar metodo de pago {% endblock %}
+
+{% block contenido %} 
+
+<div class="card">
+    <div class="card-header">Editar metodo de pago</div>
+    <div class="card-body">
+        <h4 class="card-title">Datos del metodo de pago</h4>
+        
+        {% include 'MetodoPago/FormMetodoPago.html' %}
+
+    </div>
+    <div class="card-footer text-muted">Footer</div>
+</div>
+
+{% endblock %}
