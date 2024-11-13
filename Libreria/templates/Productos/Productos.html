@@ -1,50 +1,55 @@
 {% extends "base.html" %}
 
+
 {% block titulo %} Productos {% endblock %}
 
-{% block contenido %} 
-
+{% block contenido %}
+ 
 <div class="card">
     <div class="card-header">
         <a name="" id="" class="btn btn-success" href="{% url 'CrearProducto' %}" role="button">Agregar nuevo producto</a>
     </div>
     <div class="card-body">
-        <h4 class="card-title">Productos </h4>
-        <div
-            class="table-responsive"
-        >
-            <table
-                class="table table-primary"
-            >
+        <h4 class="card-title">Producto</h4>
+        <div class="table-responsive">
+            <table class="table table-primary">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">ID_Categoria</th>
-                        <th scope="col">ID_Empleado</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Precio</th>
+                        <th scope="col">Empleados</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Imagen</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td scope="row">1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Camiseta negra monastery 10</td>
-                        <td>210.000</td>
-                        <td> <a name="" id="" class="btn btn-info" href="{% url 'EditarProducto' %}" role="button" >Editar</a>
-                             | 
-                             <a name="" id="" class="btn btn-danger" href="#" role="button" >Borrar</a>
-                        </td>
-                    </tr>
+                    {% if productos %}
+                        {% for producto in productos %}
+                            <tr>
+                                <td>{{ producto.Nombre }}</td>
+                                <td>{{ producto.Precio}}</td>
+                                <td>{{ producto.Empleados }}</td>
+                                <td>{{ producto.Categorias }}</td>
+                                <td>{{ producto.Imagen }}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'EditarProducto' producto.id %}" role="button">Editar</a>
+                                    |
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'EliminarProducto' producto.id %}" role="button" onclick="return confirm('¿Estás seguro de que deseas eliminar esta cliente?');">Borrar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No hay productos disponibles.</td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>
-        
     </div>
     <div class="card-footer text-muted">
-        
     </div>
 </div>
+
 {% endblock %}

@@ -4,51 +4,53 @@
 
 {% block contenido %} 
 
+
 <div class="card">
     <div class="card-header">
-        <a name="" id="" class="btn btn-success" href="{% url 'CrearPago' %}" role="button">Agregar nueva factura</a>
+        <a name="" id="" class="btn btn-success" href="{% url 'CrearPago' %}" role="button">Agregar nuevo pago</a>
     </div>
     <div class="card-body">
-        <h4 class="card-title">Facturas </h4>
-        <div
-            class="table-responsive"
-        >
-            <table
-                class="table table-primary"
-            >
+        <h4 class="card-title">Facturas</h4>
+        <div class="table-responsive">
+            <table class="table table-primary">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">ID_Metodo_Pago</th>
-                        <th scope="col">ID_Producto</th>
-                        <th scope="col">ID_Cliente</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Cantidad productos</th>
+                        <th scope="col">CantidadProductos</th>
                         <th scope="col">Valor</th>
+                        <th scope="col">Productos</th>
+                        <th scope="col">MetodoPago</th>
+                        <th scope="col">Clientes</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td scope="row">1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>12/11/2024</td>
-                        <td>3</td>
-                        <td>127.000</td>
-                        <td> <a name="" id="" class="btn btn-info" href="{% url 'EditarPago' %}" role="button" >Editar</a>
-                             | 
-                             <a name="" id="" class="btn btn-danger" href="#" role="button" >Borrar</a>
-                        </td>
-                    </tr>
+                    {% if facturapagos %}
+                        {% for facturapago in facturapagos %}
+                            <tr>
+                                <td>{{ facturapago.Fecha }}</td>
+                                <td>{{ facturapago.CantidadProductos}}</td>
+                                <td>{{ facturapago.Valor}}</td>
+                                <td>{{ facturapago.Productos}}</td>
+                                <td>{{ facturapago.MetodoPago}}</td>
+                                <td>{{ facturapago.Clientes}}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'EditarPago' facturapago.id %}" role="button">Editar</a>
+                                    |
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'BorrarPago' facturapago.id %}" role="button" onclick="return confirm('¿Estás seguro de que deseas eliminar esta cliente?');">Borrar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No hay facturas disponibles.</td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>
-        
     </div>
     <div class="card-footer text-muted">
-        
     </div>
 </div>
 

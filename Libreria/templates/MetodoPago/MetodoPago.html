@@ -9,36 +9,37 @@
         <a name="" id="" class="btn btn-success" href="{% url 'AñadirMetodoPago' %}" role="button">Agregar nuevo metodo de pago</a>
     </div>
     <div class="card-body">
-        <h4 class="card-title">Metodos de pago </h4>
-        <div
-            class="table-responsive"
-        >
-            <table
-                class="table table-primary"
-            >
+        <h4 class="card-title">Metodos de pago</h4>
+        <div class="table-responsive">
+            <table class="table table-primary">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td scope="row">1</td>
-                        <td>Tarjeta credito</td>
-                        <td> <a name="" id="" class="btn btn-info" href="{% url 'EditarMetodoPago' %}" role="button" >Editar</a>
-                             | 
-                             <a name="" id="" class="btn btn-danger" href="#" role="button" >Borrar</a>
-                        </td>
-                    </tr>
+                    {% if metodopagos %}
+                        {% for metodopago in metodopagos %}
+                            <tr>
+                                <td>{{ metodopago.Nombre }}</td>
+                                <td>
+                                    <a name="" id="" class="btn btn-info" href="{% url 'EditarMetodoPago' metodopago.id %}" role="button">Editar</a>
+                                    |
+                                    <a name="" id="" class="btn btn-danger" href="{% url 'BorrarMetodoPago' metodopago.id %}" role="button" onclick="return confirm('¿Estás seguro de que deseas eliminar esta cliente?');">Borrar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No hay metodos de pago disponibles.</td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>
-        
     </div>
     <div class="card-footer text-muted">
-        
     </div>
 </div>
 
