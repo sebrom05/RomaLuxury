@@ -109,3 +109,4 @@ def EditarMetodoPago(request,id):
 
 def BorrarMetodoPago(request):
     return render(request,'MetodoPago/BorrarMetodoPago.html' )
+
